@@ -1,7 +1,10 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import type { UserData } from "@/lib/userdata.interface"
-import { ArrowRight, Briefcase, GraduationCap, Languages, MapPin, Users } from "lucide-react"
+import { ArrowRight, Briefcase, GraduationCap, Languages, MapPin } from "lucide-react"
+
+import { hackerMedium, strawberry } from "@/fonts/font";
+import Link from "next/link";
 
 async function getUserData(username: string): Promise<UserData> {
     console.log("userdata", username)
@@ -26,7 +29,9 @@ export default async function UserProfilePage({ params }: { params: { username: 
         const userData = await getUserData(params.username)
 
         return (
-            <div className="min-h-screen bg-black text-white">
+            <div className="min-h-screen bg-black text-white"
+                style={hackerMedium.style}
+            >
                 {/* Navigation */}
                 <nav className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <div className="text-3xl font-bold tracking-tighter">
@@ -48,13 +53,15 @@ export default async function UserProfilePage({ params }: { params: { username: 
                             Skills
                         </a>
                     </div>
-                    <div className="bg-orange-500 text-white px-6 py-2 rounded-full hidden md:block">Contact</div>
+                    <Link href={"/"} className="bg-orange-500 text-white px-6 py-2 rounded-full hidden md:block">Connect</Link>
                 </nav>
 
                 {/* Hero Section */}
                 <section className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+                        <h1 className="text-5xl md:text-6xl font-bold leading-tight"
+                            style={strawberry.style}
+                        >
                             Hello,
                             <br />
                             {`I'm ${userData.firstName} ${userData.lastName}`}
@@ -76,20 +83,7 @@ export default async function UserProfilePage({ params }: { params: { username: 
                             )}
                         </div>
 
-                        <div className="mt-12 flex items-center gap-4">
-                            {userData.connections !== undefined && (
-                                <div className="flex items-center">
-                                    <Users className="w-5 h-5 mr-2 text-orange-500" />
-                                    <span className="font-semibold">{userData.connections}</span> connections
-                                </div>
-                            )}
-                            {userData.followers !== undefined && (
-                                <div className="flex items-center">
-                                    <Users className="w-5 h-5 mr-2 text-orange-500" />
-                                    <span className="font-semibold">{userData.followers}</span> followers
-                                </div>
-                            )}
-                        </div>
+
                     </div>
 
                     <div className="relative">
@@ -110,9 +104,7 @@ export default async function UserProfilePage({ params }: { params: { username: 
                                 </div>
                             )}
                         </div>
-                        <div className="absolute -bottom-6 -right-6 bg-orange-500 w-24 h-24 rounded-full flex items-center justify-center">
-                            <div className="text-white text-xl font-bold">10+</div>
-                        </div>
+
                     </div>
                 </section>
 
