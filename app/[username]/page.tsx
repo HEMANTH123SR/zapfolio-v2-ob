@@ -4,7 +4,7 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import type { UserData } from "@/lib/userdata.interface"
-import { ArrowRight, Briefcase, ChevronDown, ExternalLink, GraduationCap, Languages, MapPin, } from "lucide-react"
+import { ArrowRight, Briefcase, ExternalLink, GraduationCap, Languages, MapPin, } from "lucide-react"
 import { Metadata } from "next"
 import { hackerMedium, strawberry } from "@/fonts/font";
 import Link from "next/link";
@@ -121,20 +121,9 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
                         )}
                     </div>
 
-                    {/* Mobile menu */}
-                    <div className="md:hidden relative group">
-                        <button className="p-2 bg-zinc-900 rounded-lg">
-                            <ChevronDown className="w-5 h-5" />
-                        </button>
-                        <div className="absolute right-0 mt-2 w-48 bg-zinc-900 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                            <a href="#about" className="block px-4 py-2 hover:bg-zinc-800">About</a>
-                            {hasJobExperience && <a href="#experience" className="block px-4 py-2 hover:bg-zinc-800">Experience</a>}
-                            {hasEducation && <a href="#education" className="block px-4 py-2 hover:bg-zinc-800">Education</a>}
-                            {(hasSkills || hasLanguages) && <a href="#skills" className="block px-4 py-2 hover:bg-zinc-800">Skills</a>}
-                        </div>
-                    </div>
 
-                    <Link href="/" className="bg-orange-500 text-white px-6 py-2 rounded-full hidden md:block hover:bg-orange-600 transition-colors">
+
+                    <Link href="https://zapfolio.in/" className="bg-orange-500 text-white px-6 py-2 rounded-full hidden md:block hover:bg-orange-600 transition-colors">
                         Create Your Own
                     </Link>
                 </nav>
@@ -415,7 +404,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
                                 <div>
                                     <h2 className="text-3xl font-bold mb-4">Create Your Own Portfolio</h2>
                                     <p className="text-gray-300 mb-6">Build your professional portfolio in two clicks with Zapfolio. Just add your LinkedIn URL and choose a theme.</p>
-                                    <Link href="/" className="bg-orange-500 text-white px-8 py-3 rounded-full inline-flex items-center hover:bg-orange-600 transition-colors">
+                                    <Link href="https://zapfolio.in/" className="bg-orange-500 text-white px-8 py-3 rounded-full inline-flex items-center hover:bg-orange-600 transition-colors">
                                         Get Started
                                         <ExternalLink className="ml-2 w-4 h-4" />
                                     </Link>
