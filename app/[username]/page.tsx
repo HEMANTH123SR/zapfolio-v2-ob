@@ -9,10 +9,12 @@ import { Metadata } from "next"
 import { hackerMedium, strawberry } from "@/fonts/font";
 import Link from "next/link";
 
-// Generate dynamic metadata for SEO
-export async function generateMetadata({ params }: { params: { username: string } }): Promise<Metadata> {
+
+export async function generateMetadata({ params }: { params: Promise<{ username: string }> }): Promise<Metadata> {
     try {
-        const userData = await getUserData(params.username);
+        const resolvedParams = await params;
+        const username = resolvedParams.username;
+        const userData = await getUserData(username);
 
         return {
             title: `${userData.firstName} ${userData.lastName} - Professional Portfolio | Zapfolio`,
@@ -33,7 +35,6 @@ export async function generateMetadata({ params }: { params: { username: string 
                 description: userData.headline || `Professional portfolio of ${userData.firstName} ${userData.lastName}`,
                 images: userData.image ? [userData.image] : ['/zapfolio-og.jpg'],
                 type: 'profile',
-                // Removed unsupported 'profile' property
             },
             twitter: {
                 card: 'summary_large_image',
@@ -42,43 +43,47 @@ export async function generateMetadata({ params }: { params: { username: string 
                 images: userData.image ? [userData.image] : ['/zapfolio-og.jpg'],
             },
             alternates: {
-                canonical: `https://zapfolio.vercel.app/${params.username}`,
+                canonical: `https://zapfolio.vercel.app/${username}`,
             },
             robots: {
                 index: true,
                 follow: true,
             },
-        }
+        };
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
         return {
             title: 'Professional Portfolio | Zapfolio',
             description: 'Create your professional portfolio in two clicks with Zapfolio',
-        }
+        };
     }
 }
 
 async function getUserData(username: string): Promise<UserData> {
-    console.log("userdata", username)
     try {
         const response = await fetch(`https://zapfolio-app.vercel.app/api/get-user-data/${username}`, {
-            cache: "no-store", // Disable caching to always get fresh data
-        })
+            cache: "no-store",
+        });
 
         if (!response.ok) {
-            throw new Error(`Failed to fetch user data: ${response.status}`)
+            throw new Error(`Failed to fetch user data: ${response.status}`);
         }
 
-        return await response.json()
+        return await response.json();
     } catch (error) {
-        console.error("Error fetching user data:", error)
-        throw error
+        console.error("Error fetching user data:", error);
+        throw error;
     }
 }
 
-export default async function UserProfilePage({ params }: { params: { username: string } }) {
+
+
+export default async function UserProfilePage({ params }: { params: Promise<{ username: string }> }) {
     try {
-        const userData = await getUserData(params.username)
+
+        const resolvedParams = await params;
+        const username = resolvedParams.username;
+        const userData = await getUserData(username);
         const hasJobExperience = userData.jobExperience && userData.jobExperience.length > 0;
         const hasEducation = userData.education && userData.education.length > 0;
         const hasSkills = userData.skills && userData.skills.length > 0;
