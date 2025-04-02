@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ username:
                 images: userData.image ? [userData.image] : ['/zapfolio-og.jpg'],
             },
             alternates: {
-                canonical: `https://zapfolio.vercel.app/${username}`,
+                canonical: `https://zapfolio.in/${username}`,
             },
             robots: {
                 index: true,
@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: { params: Promise<{ username:
 
 async function getUserData(username: string): Promise<UserData> {
     try {
-        const response = await fetch(`https://zapfolio-app.vercel.app/api/get-user-data/${username}`, {
+        const response = await fetch(`https://zapfolio-app.in/api/get-user-data/${username}`, {
             cache: "no-store",
         });
 
