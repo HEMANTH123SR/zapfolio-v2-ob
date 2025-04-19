@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AptabaseProvider } from '@aptabase/react';
 
 
 export const metadata: Metadata = {
@@ -17,7 +18,8 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
-        {children}
+        <AptabaseProvider appKey="A-EU-6485542438">{children}</AptabaseProvider>
+
       </body>
     </html>
   );
