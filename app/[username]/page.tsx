@@ -1,9 +1,8 @@
 import { notFound } from "next/navigation"
 import type { UserData } from "@/lib/userdata.interface"
 import type { Metadata } from "next"
-
 import ProfileContent from "@/components/profile-component";
-// import ProfileAnalytics from "@/components/profile-analytics";
+import ProfileAnalytics from "@/components/profile-analytics";
 
 
 
@@ -120,7 +119,7 @@ export default async function SlateThemeProfilePage({ params }: { params: Promis
                 <ProfileContent userData={userData} />
 
 
-                {/* <ProfileAnalytics username={username} /> */}
+                <ProfileAnalytics username={username} />
 
 
 
